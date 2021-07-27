@@ -5,7 +5,7 @@ import About from "./routes/About";
 
 function App() {
   return <HashRouter>
-    <Route path="/" component={Home} />
+    <Route path="/" exact={true} component={Home} />
     <Route path="/about" component={About} />
   </HashRouter>
 }
