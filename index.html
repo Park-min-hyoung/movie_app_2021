@@ -58,7 +58,44 @@
       );
     }
     function KmToMiles() {
-      return <h3>KM 2 M</h3>;
+      const [amount, setAmount] = React.useState(0);
+      const [invert, setInvert] = React.useState(false);
+      const onChange = (event) => {
+        setAmount(event.target.value);
+      };
+      const amountReset = () => {
+        setAmount(0);
+      };
+      const onInvert = () => {
+        setInvert((invertState) => !invertState);
+        amountReset();
+      };
+
+      return (
+        <div>
+          <div>
+            <label htmlFor="km">Km</label>
+            <input
+              id="km"
+              value={invert ? amount * 1.609 : amount}
+              onChange={onChange}
+              disabled={invert}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="mile">Mile</label>
+            <input
+              id="mile"
+              value={invert ? amount : amount / 1.609}
+              onChange={onChange}
+              disabled={!invert}
+            />
+          </div>
+          <button onClick={onInvert}>{invert ? "Go To Back" : "Invert"}</button>
+          <button onClick={amountReset}>Reset</button>
+        </div>
+      );
     }
     function App() {
       const [index, setIndex] = React.useState("xx");
@@ -68,7 +105,7 @@
       return (
         <div>
           <h1>Super Convert</h1>
-          <select value={index} onChange={onSelect}>
+          <select onChange={onSelect}>
             <option value="xx">Please Select</option>
             <option value="0">Minutes & Hours</option>
             <option value="1">Km & Miles</option>
