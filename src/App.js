@@ -2,30 +2,36 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [coins, setCoins] = useState([]);
+  const [movies, setMovies] = useState([]);
   useEffect(() => {
-    fetch("https://api.coinpaprika.com/v1/tickers")
+    fetch(
+      `https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year`
+    )
       .then((response) => response.json())
       .then((json) => {
-        setCoins(json);
+        setMovies(json.data.movies);
         setLoading(false);
       });
-    // 밖에서 사용하면 이미 loading이 false로 변경되기 때문에 Loading 글자 및 개수 렌더링 문제 생김
-    // setLoading(false);
   }, []);
   return (
     <div>
-      <h1>The Coins! {loading ? "" : `(${coins.length})`} </h1>
       {loading ? (
-        <strong>Loading...</strong>
+        <h1>Loading...</h1>
       ) : (
-        <ul>
-          {coins.map((coin) => (
-            <li>
-              {coin.name} ({coin.symbol}): ${coin.quotes.USD.price} USD
-            </li>
+        <div>
+          {movies.map((movie) => (
+            <div key={movie.id}>
+              <img src={movie.medium_cover_image} />
+              <h2>{movie.title}</h2>
+              <p>{movie.summary}</p>
+              <ul>
+                {movie.genres.map((g) => (
+                  <li key={g}>{g}</li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );
