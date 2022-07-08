@@ -1,40 +1,8 @@
-import { useEffect, useState } from "react";
+// App.js는 router를 render 하는 역할
 
-function App() {
-  const [loading, setLoading] = useState(true);
-  const [movies, setMovies] = useState([]);
-  useEffect(() => {
-    fetch(
-      `https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year`
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        setMovies(json.data.movies);
-        setLoading(false);
-      });
-  }, []);
-  return (
-    <div>
-      {loading ? (
-        <h1>Loading...</h1>
-      ) : (
-        <div>
-          {movies.map((movie) => (
-            <div key={movie.id}>
-              <img src={movie.medium_cover_image} />
-              <h2>{movie.title}</h2>
-              <p>{movie.summary}</p>
-              <ul>
-                {movie.genres.map((g) => (
-                  <li key={g}>{g}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
+import { useEffect, useState } from "react";
+import Movie from "./components/Movie";
+
+function App() {}
 
 export default App;
