@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/movie_app_2021/static/js/main.ace41590.js",
-    "index.html": "/movie_app_2021/index.html",
-    "main.ace41590.js.map": "/movie_app_2021/static/js/main.ace41590.js.map"
+    "main.js": "/static/js/main.ace41590.js",
+    "index.html": "/index.html",
+    "main.ace41590.js.map": "/static/js/main.ace41590.js.map"
   },
   "entrypoints": [
     "static/js/main.ace41590.js"
